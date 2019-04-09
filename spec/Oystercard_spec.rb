@@ -20,20 +20,19 @@ end
     end
   end
 
-  describe '#deduct' do
-    it 'deducts amount from balance' do
-      subject.top_up(10)
-      expect { subject.deduct(10) }.to change { subject.balance }.by -10
-    end
-  end
+  # describe '#deduct' do
+  #   it 'deducts amount from balance' do
+  #     subject.top_up(10)
+  #     expect { subject.deduct(10) }.to change { subject.balance }.by -10
+  #   end
+  # end
 
   describe '#in_journey' do
     context do 'when touched in'
       before do
-      expect{ subject.touch_in }.to raise_error 'insufficient funds'
-    end
+        expect{ subject.touch_in }.to raise_error 'insufficient funds'
+      end
       it 'returns true' do
-
         subject.top_up(10)
         expect(subject.touch_in).to eq true
       end
@@ -41,6 +40,7 @@ end
     context do 'when touched out'
       it 'returns false' do
         expect(subject.touch_out).to eq false
+        expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
       end
     end
   end
