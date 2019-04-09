@@ -26,4 +26,17 @@ end
       expect { subject.deduct(10) }.to change { subject.balance }.by -10
     end
   end
+
+  describe '#in_journey' do
+    context do 'when touched in'
+      it 'returns true' do
+        expect(subject.touch_in).to eq true
+      end
+    end
+    context do 'when touched out'
+      it 'returns false' do
+        expect(subject.touch_out).to eq false
+      end
+    end
+  end
 end
