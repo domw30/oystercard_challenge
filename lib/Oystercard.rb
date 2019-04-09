@@ -19,6 +19,7 @@ MAXIMUM_BALANCE = 90
   end
 
   def touch_in
+    raise 'insufficient funds' if @balance < 1
     @in_journey = true
   end
 

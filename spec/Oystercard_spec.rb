@@ -29,7 +29,12 @@ end
 
   describe '#in_journey' do
     context do 'when touched in'
+      before do
+      expect{ subject.touch_in }.to raise_error 'insufficient funds'
+    end
       it 'returns true' do
+
+        subject.top_up(10)
         expect(subject.touch_in).to eq true
       end
     end
