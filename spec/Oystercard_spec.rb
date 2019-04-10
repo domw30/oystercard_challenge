@@ -40,13 +40,14 @@ end
       end
       it 'remembers entry station' do
         subject.top_up(10)
-        expect(subject.touch_in(station)).to eq station
+        expect(subject.touch_in(station)).to eq([{Entry: station}])
       end
     end
     context do 'when touched out'
+      station = "  "
       it 'forgets entry station' do
-        expect(subject.touch_out).to eq nil
-        expect { subject.touch_out }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
+        expect(subject.touch_out(station)).to eq([{Exit: station}])
+        expect { subject.touch_out(station) }.to change { subject.balance }.by(-Oystercard::MINIMUM_BALANCE)
       end
       it 'returns false' do
         expect(subject.in_journey).to eq false
