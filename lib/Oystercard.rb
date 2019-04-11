@@ -3,10 +3,12 @@ class Oystercard
 
 MAXIMUM_BALANCE = 90
 MINIMUM_BALANCE = 1
+MINIMUM_CHARGE = 3
 
   def initialize
     @balance = 0
     @trips = []
+    @trip = {}
   end
 
   def top_up(amount)
@@ -16,22 +18,19 @@ MINIMUM_BALANCE = 1
 
   def touch_in(station)
     raise 'insufficient funds' if @balance < MINIMUM_BALANCE
-
     @trip = {}
-    @entry_station = station
     @trip[:Entry] = station
-
+    return @trip
   end
 
   def touch_out(station)
-    deduct(MINIMUM_BALANCE)
-    @entry_station = nil
+    deduct(MINIMUM_CHARGE)
     @trip[:Exit] = station
     @trips << @trip
   end
 
   def in_journey
-    !!@entry_station
+    @trip.length == 1 ? true : false
   end
 
 private
