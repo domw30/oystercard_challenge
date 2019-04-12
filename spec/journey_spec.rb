@@ -4,20 +4,13 @@ describe Journey do
 
   let(:station) { double :station }
 
-  subject { described_class.new(station) }
-
-
-  describe "#initialize" do
-    it 'initializes Journey object and records the entry station' do
-      expect(subject.journey).to eq( {entry: station} )
-    end
-  end
 
     it { is_expected.to respond_to(:start_journey).with(1).argument }
 
     describe '#start_journey' do
       it 'records the entry station for a journey' do
-        expect(subject.start_journey("Old Street")).to eq( {entry: "Old Street"} )
+        subject.start_journey(station)
+        expect(subject.entry_station).to eq station
       end
     end
 
@@ -25,13 +18,13 @@ describe Journey do
 
     describe '#end_journey' do
       it 'records the exit station for a journey' do
-        subject.start_journey("Old Street")
-        expect(subject.end_journey("Farringdon")).to eq( {entry: "Old Street", exit: "Farringdon"} )
+        subject.end_journey(station)
+        expect(subject.exit_station).to eq station
       end
     end
 
     describe '#journey_complete' do
-      xit 'should return an incomplete journey if no entry station' do
+      it 'should return an incomplete journey if no entry station' do
         subject.end_journey("Farringdon")
         expect(subject.journey_complete?).to eq false
       end

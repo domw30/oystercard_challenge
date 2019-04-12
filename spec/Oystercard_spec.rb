@@ -23,13 +23,6 @@ end
     end
   end
 
-  # describe '#deduct' do
-  #   it 'deducts amount from balance' do
-  #     subject.top_up(10)
-  #     expect { subject.deduct(10) }.to change { subject.balance }.by -10
-  #   end
-  # end
-
   describe '#touch_in' do
     context 'when touched in' do
       before do
@@ -38,7 +31,7 @@ end
       it 'expects #in_journey to return true' do
         subject.top_up(10)
         subject.touch_in(station)
-        expect(subject.in_journey).to eq true
+        expect(subject.start_journey).to eq true
       end
       it 'remembers entry station' do
         subject.top_up(10)
