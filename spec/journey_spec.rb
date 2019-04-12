@@ -1,6 +1,18 @@
 require 'journey'
 
 describe Journey do
+
+  let(:station) { double :station }
+
+  subject { described_class.new(station) }
+
+
+  describe "#initialize" do
+    it 'initializes Journey object and records the entry station' do
+      expect(subject.journey).to eq( {entry: station} )
+    end
+  end
+
     it { is_expected.to respond_to(:start_journey).with(1).argument }
 
     describe '#start_journey' do
@@ -19,7 +31,7 @@ describe Journey do
     end
 
     describe '#journey_complete' do
-      it 'should return an incomplete journey if no entry station' do
+      xit 'should return an incomplete journey if no entry station' do
         subject.end_journey("Farringdon")
         expect(subject.journey_complete?).to eq false
       end
