@@ -98,4 +98,4 @@ At the beginning of the challenge, I was given the following tasks and user stor
  Acknowledgements
  -----
 
- Makers Academy Challenge
+ Makers Academy Challenge.
